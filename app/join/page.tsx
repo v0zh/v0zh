@@ -37,7 +37,7 @@ export default function JoinPage() {
       title: "GitHub 协作",
       description: "通过 GitHub 贡献代码、修复问题或改进文档",
       action: "访问 GitHub",
-      href: "https://github.com/v0zh/v0-chinese-community",
+      href: "https://github.com/v0zh/",
       color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
     },
     {
@@ -130,7 +130,7 @@ export default function JoinPage() {
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>
-              <Link href="https://github.com/v0zh/v0-chinese-community">
+              <Link href="https://github.com/v0zh/">
                 <Github className="mr-2 h-4 w-4" />
                 访问 GitHub
               </Link>

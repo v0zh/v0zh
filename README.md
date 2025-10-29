@@ -14,7 +14,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/pecommunity/v0-v0-app-chinese-community](https://vercel.com/pecommunity/v0-v0-app-chinese-community)**
+**[https://vercel.com/pecommunity/v0zh](https://vercel.com/pecommunity/v0zh)**
 
 ## Build your app
 
