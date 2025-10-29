@@ -14,7 +14,7 @@ export function Footer() {
               <span className="text-xl font-bold text-foreground">中文社区</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              v0.app 官方中文社区，为中文用户提供学习资源、案例分享和技术交流平台。
+              v0.app 中文社区，为中文用户提供学习资源、案例分享和技术交流平台。
             </p>
             <div className="mt-4 flex gap-4">
               <Link href="https://github.com" className="text-muted-foreground hover:text-foreground">

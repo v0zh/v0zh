@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -48,6 +49,7 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+          <ThemeToggle />
           <Button variant="ghost" asChild>
             <Link href="/login">登录</Link>
           </Button>
@@ -71,6 +73,9 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-4 flex flex-col gap-2">
+              <div className="flex justify-center py-2">
+                <ThemeToggle />
+              </div>
               <Button variant="ghost" asChild className="w-full">
                 <Link href="/login">登录</Link>
               </Button>
