@@ -24,36 +24,48 @@ export default function FeaturesPage() {
       title: "AI 智能生成",
       description: "通过自然语言描述，AI 自动生成高质量的 React 和 Next.js 代码",
       highlights: ["自然语言交互", "智能代码补全", "上下文理解"],
+      iconColor: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-500/10 dark:bg-purple-500/20",
     },
     {
       icon: Code2,
       title: "实时代码预览",
       description: "即时查看代码运行效果，支持热重载和实时编辑",
       highlights: ["即时预览", "热重载", "多设备预览"],
+      iconColor: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-500/10 dark:bg-blue-500/20",
     },
     {
       icon: Zap,
       title: "快速迭代",
       description: "通过对话式交互快速调整设计和功能，大幅提升开发效率",
       highlights: ["对话式开发", "快速修改", "版本管理"],
+      iconColor: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-500/10 dark:bg-orange-500/20",
     },
     {
       icon: Palette,
       title: "现代化设计",
       description: "内置 shadcn/ui 组件库和 Tailwind CSS，轻松实现精美界面",
       highlights: ["shadcn/ui", "Tailwind CSS", "响应式设计"],
+      iconColor: "text-pink-600 dark:text-pink-400",
+      bgColor: "bg-pink-500/10 dark:bg-pink-500/20",
     },
     {
       icon: Database,
       title: "数据库集成",
       description: "支持 Supabase、Neon 等主流数据库，快速构建全栈应用",
       highlights: ["Supabase", "Neon", "Upstash"],
+      iconColor: "text-green-600 dark:text-green-400",
+      bgColor: "bg-green-500/10 dark:bg-green-500/20",
     },
     {
       icon: Globe,
       title: "一键部署",
       description: "与 Vercel 深度集成，一键部署到生产环境",
       highlights: ["Vercel 部署", "自动 CI/CD", "全球 CDN"],
+      iconColor: "text-cyan-600 dark:text-cyan-400",
+      bgColor: "bg-cyan-500/10 dark:bg-cyan-500/20",
     },
   ]
 
@@ -62,31 +74,43 @@ export default function FeaturesPage() {
       icon: Layers,
       title: "组件化开发",
       description: "自动拆分组件，保持代码结构清晰和可维护性",
+      iconColor: "text-indigo-600 dark:text-indigo-400",
+      bgColor: "bg-indigo-500/10 dark:bg-indigo-500/20",
     },
     {
       icon: Terminal,
       title: "TypeScript 支持",
       description: "完整的 TypeScript 类型支持，提供更好的开发体验",
+      iconColor: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-500/10 dark:bg-blue-500/20",
     },
     {
       icon: GitBranch,
       title: "版本控制",
       description: "支持 GitHub 集成，方便团队协作和代码管理",
+      iconColor: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-500/10 dark:bg-orange-500/20",
     },
     {
       icon: Rocket,
       title: "性能优化",
       description: "自动优化代码性能，包括图片优化、代码分割等",
+      iconColor: "text-red-600 dark:text-red-400",
+      bgColor: "bg-red-500/10 dark:bg-red-500/20",
     },
     {
       icon: Shield,
       title: "安全可靠",
       description: "遵循最佳安全实践，保护你的应用和数据安全",
+      iconColor: "text-green-600 dark:text-green-400",
+      bgColor: "bg-green-500/10 dark:bg-green-500/20",
     },
     {
       icon: Users,
       title: "团队协作",
       description: "支持多人协作开发，提高团队生产力",
+      iconColor: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-500/10 dark:bg-purple-500/20",
     },
   ]
 
@@ -94,22 +118,22 @@ export default function FeaturesPage() {
     {
       title: "快速原型开发",
       description: "在几分钟内将想法转化为可交互的原型",
-      color: "bg-blue-500/10 text-blue-500",
+      color: "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400",
     },
     {
       title: "落地页制作",
       description: "快速创建精美的营销落地页和产品展示页",
-      color: "bg-purple-500/10 text-purple-500",
+      color: "bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400",
     },
     {
       title: "管理后台",
       description: "构建功能完整的管理后台和数据看板",
-      color: "bg-green-500/10 text-green-500",
+      color: "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400",
     },
     {
       title: "全栈应用",
       description: "开发包含前后端的完整 Web 应用",
-      color: "bg-orange-500/10 text-orange-500",
+      color: "bg-orange-500/10 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400",
     },
   ]
 
@@ -142,8 +166,8 @@ export default function FeaturesPage() {
             {coreFeatures.map((feature) => (
               <Card key={feature.title} className="border-border">
                 <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <feature.icon className="h-6 w-6 text-primary" />
+                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${feature.bgColor}`}>
+                    <feature.icon className={`h-6 w-6 ${feature.iconColor}`} />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                   <CardDescription className="text-muted-foreground">{feature.description}</CardDescription>
@@ -174,8 +198,8 @@ export default function FeaturesPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {advancedFeatures.map((feature) => (
               <div key={feature.title} className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <feature.icon className="h-5 w-5 text-primary" />
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${feature.bgColor}`}>
+                  <feature.icon className={`h-5 w-5 ${feature.iconColor}`} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">{feature.title}</h3>

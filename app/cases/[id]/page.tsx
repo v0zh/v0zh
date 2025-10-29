@@ -7,15 +7,19 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Eye, Heart, Share2, Bookmark, ArrowLeft, ExternalLink, Github } from "lucide-react"
-import { mockCases } from "@/lib/mock-data"
+import { getCaseById, getAllCases } from "@/lib/markdown"
+import ReactMarkdown from "react-markdown"
 
 export default async function CaseDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const caseStudy = mockCases.find((c) => c.id === id)
+  const caseStudy = getCaseById(id)
 
   if (!caseStudy) {
     notFound()
   }
+
+  const allCases = getAllCases()
+  const relatedCases = allCases.filter((c) => c.id !== id && c.category === caseStudy.category).slice(0, 3)
 
   return (
     <div className="flex flex-col">
@@ -50,20 +54,24 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ id:
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
               <Avatar className="h-12 w-12">
-                <AvatarImage src={caseStudy.author.avatar || "/placeholder.svg"} alt={caseStudy.author.name} />
-                <AvatarFallback>{caseStudy.author.name[0]}</AvatarFallback>
+                <AvatarImage src={caseStudy.authorAvatar || "/placeholder.svg"} alt={caseStudy.author} />
+                <AvatarFallback>{caseStudy.author[0]}</AvatarFallback>
               </Avatar>
               <div>
-                <div className="font-medium text-foreground">{caseStudy.author.name}</div>
+                <div className="font-medium text-foreground">{caseStudy.author}</div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Eye className="h-3 w-3" />
-                    {caseStudy.views}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Heart className="h-3 w-3" />
-                    {caseStudy.likes}
-                  </div>
+                  {caseStudy.views !== undefined && (
+                    <div className="flex items-center gap-1">
+                      <Eye className="h-3 w-3" />
+                      {caseStudy.views}
+                    </div>
+                  )}
+                  {caseStudy.likes !== undefined && (
+                    <div className="flex items-center gap-1">
+                      <Heart className="h-3 w-3" />
+                      {caseStudy.likes}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -115,8 +123,8 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ id:
           <Separator className="my-8" />
 
           {/* Case Content */}
-          <div className="prose prose-slate max-w-none dark:prose-invert">
-            <div className="whitespace-pre-wrap text-foreground leading-relaxed">{caseStudy.content}</div>
+          <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-muted prose-li:text-foreground">
+            <ReactMarkdown>{caseStudy.content}</ReactMarkdown>
           </div>
 
           {/* Tags */}
@@ -135,7 +143,7 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ id:
             <div className="flex items-center gap-4">
               <Button variant="outline">
                 <Heart className="mr-2 h-4 w-4" />
-                点赞 ({caseStudy.likes})
+                点赞 {caseStudy.likes !== undefined && `(${caseStudy.likes})`}
               </Button>
               <Button variant="outline">
                 <Bookmark className="mr-2 h-4 w-4" />
@@ -151,34 +159,36 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ id:
       </article>
 
       {/* Related Cases */}
-      <section className="bg-muted/50 px-4 py-12">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-2xl font-bold text-foreground">相关案例</h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {mockCases.slice(0, 3).map((relatedCase) => (
-              <Link key={relatedCase.id} href={`/cases/${relatedCase.id}`}>
-                <Card className="h-full overflow-hidden border-border transition-shadow hover:shadow-lg">
-                  <div className="relative aspect-video bg-muted">
-                    <Image
-                      src={relatedCase.thumbnail || "/placeholder.svg"}
-                      alt={relatedCase.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <Badge variant="secondary" className="mb-2">
-                      {relatedCase.category}
-                    </Badge>
-                    <h3 className="line-clamp-2 font-semibold text-foreground">{relatedCase.title}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{relatedCase.description}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+      {relatedCases.length > 0 && (
+        <section className="bg-muted/50 px-4 py-12">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="text-2xl font-bold text-foreground">相关案例</h2>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedCases.map((relatedCase) => (
+                <Link key={relatedCase.id} href={`/cases/${relatedCase.id}`}>
+                  <Card className="h-full overflow-hidden border-border transition-shadow hover:shadow-lg">
+                    <div className="relative aspect-video bg-muted">
+                      <Image
+                        src={relatedCase.thumbnail || "/placeholder.svg"}
+                        alt={relatedCase.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-4">
+                      <Badge variant="secondary" className="mb-2">
+                        {relatedCase.category}
+                      </Badge>
+                      <h3 className="line-clamp-2 font-semibold text-foreground">{relatedCase.title}</h3>
+                      <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{relatedCase.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   )
 }

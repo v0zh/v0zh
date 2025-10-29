@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Search, Clock, Eye, Heart, PenSquare } from "lucide-react"
-import { mockArticles, categories } from "@/lib/mock-data"
+import { getAllArticles, getArticleCategories } from "@/lib/markdown"
 
 export default function ArticlesPage() {
+  const articles = getAllArticles()
+  const categories = getArticleCategories()
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -31,7 +34,7 @@ export default function ArticlesPage() {
           {/* CTA Button */}
           <div className="mt-6 text-center">
             <Button asChild>
-              <Link href="/articles/new">
+              <Link href="/join#contribute">
                 <PenSquare className="mr-2 h-4 w-4" />
                 分享你的文章
               </Link>
@@ -56,63 +59,80 @@ export default function ArticlesPage() {
       {/* Articles Grid */}
       <section className="px-4 py-12">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {mockArticles.map((article) => (
-              <Link key={article.id} href={`/articles/${article.id}`}>
-                <Card className="h-full border-border transition-shadow hover:shadow-lg">
-                  <CardHeader>
-                    <div className="mb-2 flex items-center gap-2">
-                      <Badge variant="secondary">{article.category}</Badge>
-                      <span className="text-xs text-muted-foreground">{article.publishedAt}</span>
-                    </div>
-                    <CardTitle className="line-clamp-2 text-xl">{article.title}</CardTitle>
-                    <CardDescription className="line-clamp-3 text-muted-foreground">
-                      {article.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage src={article.author.avatar || "/placeholder.svg"} alt={article.author.name} />
-                          <AvatarFallback>{article.author.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <span className="text-sm text-muted-foreground">{article.author.name}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {article.readTime}
+          {articles.length === 0 ? (
+            <div className="py-12 text-center">
+              <p className="text-muted-foreground">暂无文章，欢迎贡献第一篇文章！</p>
+              <Button asChild className="mt-4">
+                <Link href="/join#contribute">了解如何贡献</Link>
+              </Button>
+            </div>
+          ) : (
+            <>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {articles.map((article) => (
+                  <Link key={article.id} href={`/articles/${article.id}`}>
+                    <Card className="h-full border-border transition-shadow hover:shadow-lg">
+                      <CardHeader>
+                        <div className="mb-2 flex items-center gap-2">
+                          <Badge variant="secondary">{article.category}</Badge>
+                          <span className="text-xs text-muted-foreground">{article.publishedAt}</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Eye className="h-3 w-3" />
-                          {article.views}
+                        <CardTitle className="line-clamp-2 text-xl">{article.title}</CardTitle>
+                        <CardDescription className="line-clamp-3 text-muted-foreground">
+                          {article.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Avatar className="h-8 w-8">
+                              <AvatarImage src={article.authorAvatar || "/placeholder.svg"} alt={article.author} />
+                              <AvatarFallback>{article.author[0]}</AvatarFallback>
+                            </Avatar>
+                            <span className="text-sm text-muted-foreground">{article.author}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {article.readTime}
+                            </div>
+                            {article.views !== undefined && (
+                              <div className="flex items-center gap-1">
+                                <Eye className="h-3 w-3" />
+                                {article.views}
+                              </div>
+                            )}
+                            {article.likes !== undefined && (
+                              <div className="flex items-center gap-1">
+                                <Heart className="h-3 w-3" />
+                                {article.likes}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Heart className="h-3 w-3" />
-                          {article.likes}
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {article.tags.map((tag) => (
+                            <Badge key={tag} variant="outline" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
                         </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {article.tags.map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
 
-          {/* Load More */}
-          <div className="mt-12 text-center">
-            <Button variant="outline" size="lg">
-              加载更多文章
-            </Button>
-          </div>
+              {/* Load More - Hidden for now as we show all articles */}
+              {articles.length > 9 && (
+                <div className="mt-12 text-center">
+                  <Button variant="outline" size="lg">
+                    加载更多文章
+                  </Button>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
     </div>

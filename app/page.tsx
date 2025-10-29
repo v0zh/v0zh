@@ -9,21 +9,29 @@ export default function HomePage() {
       icon: Sparkles,
       title: "AI 驱动开发",
       description: "使用 AI 快速生成高质量的 React 和 Next.js 代码",
+      iconColor: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-500/10 dark:bg-purple-500/20",
     },
     {
       icon: Code2,
       title: "即时预览",
       description: "实时查看代码效果，快速迭代和调整设计",
+      iconColor: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-500/10 dark:bg-blue-500/20",
     },
     {
       icon: BookOpen,
       title: "学习资源",
       description: "丰富的教程、文章和最佳实践分享",
+      iconColor: "text-green-600 dark:text-green-400",
+      bgColor: "bg-green-500/10 dark:bg-green-500/20",
     },
     {
       icon: Users,
       title: "活跃社区",
       description: "与其他开发者交流经验，共同成长",
+      iconColor: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-500/10 dark:bg-orange-500/20",
     },
   ]
 
@@ -41,8 +49,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
             <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-              欢迎来到 v0.app
-              <span className="text-primary"> 中文社区</span>
+              欢迎来到 v0.app 中文社区
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
               为中文开发者提供 v0.app 学习资源、实战案例和技术交流平台。 加入我们，一起探索 AI 驱动的前端开发新时代。
@@ -92,8 +99,8 @@ export default function HomePage() {
             {features.map((feature) => (
               <Card key={feature.title} className="border-border">
                 <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <feature.icon className="h-6 w-6 text-primary" />
+                  <div className={`mb-2 flex h-12 w-12 items-center justify-center rounded-lg ${feature.bgColor}`}>
+                    <feature.icon className={`h-6 w-6 ${feature.iconColor}`} />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>

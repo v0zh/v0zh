@@ -11,16 +11,22 @@ export default function AboutPage() {
       icon: Target,
       title: "我们的使命",
       description: "为中文开发者提供最优质的 v0.app 学习资源和交流平台，降低 AI 驱动开发的学习门槛。",
+      iconColor: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-500/10 dark:bg-blue-500/20",
     },
     {
       icon: Users,
       title: "社区驱动",
       description: "由社区成员共同维护和贡献，每个人都可以分享经验、提出建议和参与建设。",
+      iconColor: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-500/10 dark:bg-purple-500/20",
     },
     {
       icon: Heart,
       title: "开放包容",
       description: "欢迎所有对 v0.app 感兴趣的开发者，无论你是初学者还是资深专家。",
+      iconColor: "text-pink-600 dark:text-pink-400",
+      bgColor: "bg-pink-500/10 dark:bg-pink-500/20",
     },
   ]
 
@@ -29,16 +35,22 @@ export default function AboutPage() {
       icon: BookOpen,
       title: "知识共享",
       description: "鼓励成员分享学习心得和实战经验",
+      iconColor: "text-green-600 dark:text-green-400",
+      bgColor: "bg-green-500/10 dark:bg-green-500/20",
     },
     {
       icon: Zap,
       title: "持续创新",
       description: "探索 AI 开发的最新技术和最佳实践",
+      iconColor: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-500/10 dark:bg-orange-500/20",
     },
     {
       icon: Globe,
       title: "全球视野",
       description: "连接中文社区与国际 v0 生态系统",
+      iconColor: "text-cyan-600 dark:text-cyan-400",
+      bgColor: "bg-cyan-500/10 dark:bg-cyan-500/20",
     },
   ]
 
@@ -101,8 +113,8 @@ export default function AboutPage() {
             {mission.map((item) => (
               <Card key={item.title} className="border-border">
                 <CardHeader>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <item.icon className="h-6 w-6 text-primary" />
+                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${item.bgColor}`}>
+                    <item.icon className={`h-6 w-6 ${item.iconColor}`} />
                   </div>
                   <CardTitle className="text-xl">{item.title}</CardTitle>
                 </CardHeader>
@@ -126,8 +138,8 @@ export default function AboutPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((value) => (
               <div key={value.title} className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <value.icon className="h-5 w-5 text-primary" />
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${value.bgColor}`}>
+                  <value.icon className={`h-5 w-5 ${value.iconColor}`} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">{value.title}</h3>
