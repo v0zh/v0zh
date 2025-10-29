@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Github, Twitter } from "lucide-react"
 
 export function Footer() {
@@ -8,8 +9,8 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="font-mono text-lg font-bold text-primary-foreground">v0</span>
+              <div className="relative h-10 w-10">
+                <Image src="/v0zh-logo.png" alt="v0zh Logo" width={40} height={40} className="object-contain" />
               </div>
               <span className="text-xl font-bold text-foreground">中文社区</span>
             </div>

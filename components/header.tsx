@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -23,8 +24,8 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="font-mono text-lg font-bold text-primary-foreground">v0</span>
+            <div className="relative h-10 w-10">
+              <Image src="/v0zh-logo.png" alt="v0zh Logo" width={40} height={40} className="object-contain" priority />
             </div>
             <span className="text-xl font-bold text-foreground">中文社区</span>
           </Link>

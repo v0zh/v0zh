@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "v0.app 中文社区 - 学习资源与案例分享",
   description: "v0.app 官方中文社区，提供功能介绍、文章分享、案例展示和社区协作平台",
   generator: "v0.app",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/v0zh-logo.png",
+  },
 }
 
 export default function RootLayout({
