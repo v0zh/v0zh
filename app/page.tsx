@@ -64,6 +64,9 @@ export default function HomePage() {
               <Button size="lg" variant="outline" asChild>
                 <Link href="/features">了解更多</Link>
               </Button>
+              <Button size="lg" asChild>
+                <Link href="https://v0101.vercel.app">中文指南</Link>
+              </Button>
             </div>
           </div>
         </div>
